@@ -1,25 +1,53 @@
-<%= form_tag '/addresses', method: :post do %>
-    <div>
-      <%= label_tag :street_address %>
-      <%= text_field_tag :street_address%>
-    </div>
+<div class="col-md-8 page-container">
 
-    <div>
-      <%= label_tag :city %>
-      <%= text_field_tag :city%>
-    </div>
+  <div id="form-title" class="row justify-content-center align-items-center">
+    <h1>Address Validator</h1>
+  </div>
 
-    <div>
-      <%= label_tag :state %>
-      <%= text_field_tag :state%>
-    </div>
+  <div id="form-body" class="row justify-content-center align-items-center">
+    <%= form_tag '/addresses', method: :post, id: "needs-validation", novalidate: "true" do %>
+      
+      <div class="form-group is-required">
+        <%= label_tag :street_address %>
+        <%= text_field_tag :street_address, nil, class: "form-control form-control-lg", pattern: '^([0-9]+)([\s\/-])([.,#&\'\/\w\-\s])+', required: "true"%>
+        <div class="invalid-feedback">
+          Please provide a valid house number and street name.
+        </div>
+      </div>
+     
+      <div class="form-group is-required">
+        <%= label_tag :city %>
+        <%= text_field_tag :city, nil, class: "form-control form-control-lg", pattern: '^([\w\-\s\.])+', required: "true"%>
+        <div class="invalid-feedback">
+          Please provide a valid city.
+        </div>
+      </div>
 
-    <div>
-      <%= label_tag :zip_code %>
-      <%= text_field_tag :zip_code%>
-    </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group is-required"> 
+            <%= label_tag :state %>
+            <%= select_tag :state, options_for_select(us_states), class: "form-control form-control-lg", prompt: "", required: "true"%>
+            <div class="invalid-feedback">
+              Please select a valid state.
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="form-group is-required">
+            <%= label_tag :zip_code%>
+            <%= text_field_tag :zip_code, nil, class: "form-control form-control-lg", pattern: '\d{5}(?:[\-\s]\d{4})?', required: "true"%>
+            <div class="invalid-feedback">
+              Please provide a valid zip code (##### or #####-####).
+            </div>
+          </div>
+        </div>
+      </div>  
 
-    <div class = "buttons">
-      <%= submit_tag 'Validate Address' %>
-    </div>
-<% end %>
+      <div class="form-actions">
+        <%= button_tag "Submit", id: "submit", class: "btn btn-lg btn-block" %>
+      </div>
+    <% end %>
+  </div>
+</div>
