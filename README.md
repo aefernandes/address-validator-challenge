@@ -84,9 +84,33 @@ Your finished project should:
 
 When submitting the project please answer the following questions:
  1. What gems if any did you choose to use and why?
+
+    I chose to use Bootstrap for front-end components because of ease of designing, and familiarity given time constraints. I also installed JQuery as a dependency.
+
+    I installed Geocoder, a well-documented and commonly-downloaded gem, to verify that the addresses submitted were real locations. I also relied on StreetAddress to handle regex parsing of the user-inputted street addresses.  
+
+    Finally, I installed wdm to avoid a warning from rake.
+
  2. Were there any specific challenges or struggles you faced along the way?
+
+    As this was my first time working with Ruby, I spent a good deal of time becoming familiar with Rails and RSpec. I found myself translating back and forth between other concepts I was familiar with to better understand this project.
+    
+    Additionally, when validating street addresses, I found that the standardized format used by USPS cannot be expressed completely using regular expressions, as there is no context-free grammar for it. Thus, the street address validation has some inherent limitations. After much research into other APIs and services, it seems that there are certain ones worth paying for, but if we want to fit the USPS standard, I'd like to know if there is a way to abide by their license terms.
+
+    I also spent a lot of time thinking about the end "user" for this project, in an attempt to design a site that would best fit their needs. I debated with myself over design decisions such as the choice to add a state selection dropdown instead of a text field. 
+
+
  3. Is there anything you'd want to improve or optimize if you had more time?
+
+    I would want to investigate the use of other street parsing and geocoding services, in particular SmartyStreets. I would also add more detailed and explicit feedback for the user when there is invalid input, such as differentiating between empty fields and values that don't match a given pattern. I would also want to save their input so it could be edited after they received an error message. More generally, I would add far more tests, especially JS unit tests. 
+
+    Additionally, one reach idea I implemented on a separate branch is forgoing text-parsing at all in favor of using the Google Places API's autocomplete feature. This allows the user to start typing an address and select the correct one from Google's dropdown. I'd be interested to conduct user research to see how people interact with the different methods of address validation.
+
+
+
  4. If you were to take this project to production, what would be on your list of things to do?
+
+    I would want to conduct more extensive security and accessibility testing on the front end, especially across browsers. I would want to automate testing and builds, add more logging, fix the rate limiting on the geocoding API, and run load tests. 
 
 
 
