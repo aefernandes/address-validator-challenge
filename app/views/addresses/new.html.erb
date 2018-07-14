@@ -5,45 +5,32 @@
   </div>
 
   <div id="form-body" class="row justify-content-center align-items-center">
-    <%= form_tag '/addresses', method: :post, id: "needs-validation", novalidate: "true" do %>
+    <%= form_tag '/addresses', method: :post do %>
+    <div class="row">
+      <div class="col-md-6">
+        <div id="locationField">
+          <input id="autocomplete" placeholder="Enter your address" onFocus="geolocate()" type="text"></input>
+        </div>
+      </div>
+        <div class="col-md-6">
+        <div class="row">
+            <%= text_field_tag :house_number, nil, class: "field", id: "street_number", placeholder: "House Number", disabled: "true"%>
+        </div>
+        <div class="row">
+          <%= text_field_tag :street_name, nil, class: "field", id: "route", placeholder: "Street Name", disabled: "true"%>
+        </div>
+        <div class="row">
+          <%= text_field_tag :city, nil, class: "field", id: "locality", placeholder: "City", disabled: "true"%>
+        </div>
+        <div class="row">
+          <%= text_field_tag :state, nil, class: "field", id: "administrative_area_level_1", placeholder: "State", disabled: "true"%>
+        </div>
+        <div class="row">
+          <%= text_field_tag :zip_code, nil, class: "field", id: "postal_code", placeholder: "ZIP Code", disabled: "true"%>
+        </div>
+      </div>
+</div>
       
-      <div class="form-group is-required">
-        <%= label_tag :street_address %>
-        <%= text_field_tag :street_address, nil, class: "form-control form-control-lg", pattern: '^([0-9]+)([\s\/-])([.,#&\'\/\w\-\s])+', required: "true"%>
-        <div class="invalid-feedback">
-          Please provide a valid house number and street name.
-        </div>
-      </div>
-     
-      <div class="form-group is-required">
-        <%= label_tag :city %>
-        <%= text_field_tag :city, nil, class: "form-control form-control-lg", pattern: '^([\w\-\s\.])+', required: "true"%>
-        <div class="invalid-feedback">
-          Please provide a valid city.
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group is-required"> 
-            <%= label_tag :state %>
-            <%= select_tag :state, options_for_select(us_states), class: "form-control form-control-lg", prompt: "", required: "true"%>
-            <div class="invalid-feedback">
-              Please select a valid state.
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-md-6">
-          <div class="form-group is-required">
-            <%= label_tag :zip_code%>
-            <%= text_field_tag :zip_code, nil, class: "form-control form-control-lg", pattern: '\d{5}(?:[\-\s]\d{4})?', required: "true"%>
-            <div class="invalid-feedback">
-              Please provide a valid zip code (##### or #####-####).
-            </div>
-          </div>
-        </div>
-      </div>  
 
       <div class="form-actions">
         <%= button_tag "Submit", id: "submit", class: "btn btn-lg btn-block" %>
@@ -51,3 +38,6 @@
     <% end %>
   </div>
 </div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBot8cACK5aXhcn17fJJ4oGklzMD1XKrYg&libraries=places&callback=initAutocomplete"
+        async defer></script>

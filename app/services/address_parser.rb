@@ -1,5 +1,5 @@
 class AddressParser
-    attr_accessor :street_address, :city, :state, :zip_code
+    attr_accessor :house_number, :street_name, :city, :state, :zip_code
   
     def initialize(params)
       params.each { |key, value| send "#{key}=",value}
@@ -28,7 +28,7 @@ class AddressParser
       end
   
       def combined_address_string
-        "#{street_address}, #{city}, #{state}, #{zip_code}"
+        "#{house_number} #{street_name}, #{city}, #{state}, #{zip_code}"
       end
   
       def valid_location?
